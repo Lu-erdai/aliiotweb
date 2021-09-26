@@ -291,7 +291,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问
         filterChainDefinitionMap.put("/login", "anon,captchaValidate");
-        filterChainDefinitionMap.put("/api/aliiot/**", "anon");
+        filterChainDefinitionMap.put("/aliiot/api/**", "anon");
 
 
         // 注册相关

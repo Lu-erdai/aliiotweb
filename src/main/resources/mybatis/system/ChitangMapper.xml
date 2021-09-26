@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.chitang.mapper.ChitangMapper">
+    
+    <resultMap type="Chitang" id="ChitangResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="pondmaster"    column="pondmaster"    />
+        <result property="area"    column="area"    />
+        <result property="deep"    column="deep"    />
+        <result property="buildDay"    column="build_day"    />
+        <result property="buildCost"    column="build_cost"    />
+        <result property="devNum"    column="dev_num"    />
+        <result property="project"    column="project"    />
+        <result property="phone"    column="phone"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectChitangVo">
+        select id, name, pondmaster, area, deep, build_day, build_cost, dev_num, project, phone, longitude, latitude, remark from sys_chitang
+    </sql>
+
+    <select id="selectChitangList" parameterType="Chitang" resultMap="ChitangResult">
+        <include refid="selectChitangVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="pondmaster != null  and pondmaster != ''"> and pondmaster = #{pondmaster}</if>
+            <if test="area != null "> and area = #{area}</if>
+            <if test="deep != null "> and deep = #{deep}</if>
+            <if test="buildDay != null "> and build_day = #{buildDay}</if>
+            <if test="buildCost != null  and buildCost != ''"> and build_cost = #{buildCost}</if>
+            <if test="devNum != null  and devNum != ''"> and dev_num = #{devNum}</if>
+            <if test="project != null "> and project = #{project}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="longitude != null "> and longitude = #{longitude}</if>
+            <if test="latitude != null "> and latitude = #{latitude}</if>
+        </where>
+    </select>
+    
+    <select id="selectChitangById" parameterType="Long" resultMap="ChitangResult">
+        <include refid="selectChitangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertChitang" parameterType="Chitang" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_chitang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="pondmaster != null">pondmaster,</if>
+            <if test="area != null">area,</if>
+            <if test="deep != null">deep,</if>
+            <if test="buildDay != null">build_day,</if>
+            <if test="buildCost != null">build_cost,</if>
+            <if test="devNum != null">dev_num,</if>
+            <if test="project != null">project,</if>
+            <if test="phone != null">phone,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="pondmaster != null">#{pondmaster},</if>
+            <if test="area != null">#{area},</if>
+            <if test="deep != null">#{deep},</if>
+            <if test="buildDay != null">#{buildDay},</if>
+            <if test="buildCost != null">#{buildCost},</if>
+            <if test="devNum != null">#{devNum},</if>
+            <if test="project != null">#{project},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateChitang" parameterType="Chitang">
+        update sys_chitang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="pondmaster != null">pondmaster = #{pondmaster},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="deep != null">deep = #{deep},</if>
+            <if test="buildDay != null">build_day = #{buildDay},</if>
+            <if test="buildCost != null">build_cost = #{buildCost},</if>
+            <if test="devNum != null">dev_num = #{devNum},</if>
+            <if test="project != null">project = #{project},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteChitangById" parameterType="Long">
+        delete from sys_chitang where id = #{id}
+    </delete>
+
+    <delete id="deleteChitangByIds" parameterType="String">
+        delete from sys_chitang where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
