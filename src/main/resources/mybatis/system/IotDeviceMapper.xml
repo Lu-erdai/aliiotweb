@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.device.mapper.IotDeviceMapper">
+    
+    <resultMap type="IotDevice" id="IotDeviceResult">
+        <result property="id"    column="id"    />
+        <result property="M1OXHi"    column="M1OXHi"    />
+        <result property="M1OXLow"    column="M1OXLow"    />
+        <result property="M1T1Span"    column="M1T1Span"    />
+        <result property="M1T2Span"    column="M1T2Span"    />
+        <result property="M1T3Span"    column="M1T3Span"    />
+        <result property="M1WorkMode"    column="M1WorkMode"    />
+        <result property="M1WorkState"    column="M1WorkState"    />
+        <result property="M2OXHi"    column="M2OXHi"    />
+        <result property="M2OXLow"    column="M2OXLow"    />
+        <result property="M2T1Span"    column="M2T1Span"    />
+        <result property="M2T2Span"    column="M2T2Span"    />
+        <result property="M2T3Span"    column="M2T3Span"    />
+        <result property="M2WorkMode"    column="M2WorkMode"    />
+        <result property="M2WorkState"    column="M2WorkState"    />
+        <result property="deviceName"    column="deviceName"    />
+        <result property="dox"    column="dox"    />
+        <result property="lastCommTime"    column="lastCommTime"    />
+        <result property="lastDataTime"    column="lastDataTime"    />
+        <result property="onlineState"    column="onlineState"    />
+        <result property="pH"    column="pH"    />
+        <result property="productKey"    column="productKey"    />
+        <result property="waterTemp"    column="waterTemp"    />
+        <result property="onOffTime"    column="onOffTime"    />
+    </resultMap>
+
+    <sql id="selectIotDeviceVo">
+        select id, M1OXHi, M1OXLow, M1T1Span, M1T2Span, M1T3Span, M1WorkMode, M1WorkState, M2OXHi, M2OXLow, M2T1Span, M2T2Span, M2T3Span, M2WorkMode, M2WorkState, deviceName, dox, lastCommTime, lastDataTime, onlineState, pH, productKey, waterTemp, onOffTime from iot_device
+    </sql>
+
+    <select id="selectIotDeviceList" parameterType="IotDevice" resultMap="IotDeviceResult">
+        <include refid="selectIotDeviceVo"/>
+        <where>  
+            <if test="M1OXHi != null "> and M1OXHi = #{M1OXHi}</if>
+            <if test="M1OXLow != null "> and M1OXLow = #{M1OXLow}</if>
+            <if test="M1T1Span != null  and M1T1Span != ''"> and M1T1Span = #{M1T1Span}</if>
+            <if test="M1T2Span != null  and M1T2Span != ''"> and M1T2Span = #{M1T2Span}</if>
+            <if test="M1T3Span != null  and M1T3Span != ''"> and M1T3Span = #{M1T3Span}</if>
+            <if test="M1WorkMode != null "> and M1WorkMode = #{M1WorkMode}</if>
+            <if test="M1WorkState != null "> and M1WorkState = #{M1WorkState}</if>
+            <if test="M2OXHi != null "> and M2OXHi = #{M2OXHi}</if>
+            <if test="M2OXLow != null "> and M2OXLow = #{M2OXLow}</if>
+            <if test="M2T1Span != null  and M2T1Span != ''"> and M2T1Span = #{M2T1Span}</if>
+            <if test="M2T2Span != null  and M2T2Span != ''"> and M2T2Span = #{M2T2Span}</if>
+            <if test="M2T3Span != null  and M2T3Span != ''"> and M2T3Span = #{M2T3Span}</if>
+            <if test="M2WorkMode != null "> and M2WorkMode = #{M2WorkMode}</if>
+            <if test="M2WorkState != null "> and M2WorkState = #{M2WorkState}</if>
+            <if test="deviceName != null  and deviceName != ''"> and deviceName like concat('%', #{deviceName}, '%')</if>
+            <if test="dox != null "> and dox = #{dox}</if>
+            <if test="lastCommTime != null "> and lastCommTime = #{lastCommTime}</if>
+            <if test="lastDataTime != null "> and lastDataTime = #{lastDataTime}</if>
+            <if test="onlineState != null "> and onlineState = #{onlineState}</if>
+            <if test="pH != null "> and pH = #{pH}</if>
+            <if test="productKey != null  and productKey != ''"> and productKey = #{productKey}</if>
+            <if test="waterTemp != null "> and waterTemp = #{waterTemp}</if>
+            <if test="onOffTime != null "> and onOffTime = #{onOffTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectIotDeviceById" parameterType="String" resultMap="IotDeviceResult">
+        <include refid="selectIotDeviceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertIotDevice" parameterType="IotDevice">
+        insert into iot_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="M1OXHi != null">M1OXHi,</if>
+            <if test="M1OXLow != null">M1OXLow,</if>
+            <if test="M1T1Span != null">M1T1Span,</if>
+            <if test="M1T2Span != null">M1T2Span,</if>
+            <if test="M1T3Span != null">M1T3Span,</if>
+            <if test="M1WorkMode != null">M1WorkMode,</if>
+            <if test="M1WorkState != null">M1WorkState,</if>
+            <if test="M2OXHi != null">M2OXHi,</if>
+            <if test="M2OXLow != null">M2OXLow,</if>
+            <if test="M2T1Span != null">M2T1Span,</if>
+            <if test="M2T2Span != null">M2T2Span,</if>
+            <if test="M2T3Span != null">M2T3Span,</if>
+            <if test="M2WorkMode != null">M2WorkMode,</if>
+            <if test="M2WorkState != null">M2WorkState,</if>
+            <if test="deviceName != null">deviceName,</if>
+            <if test="dox != null">dox,</if>
+            <if test="lastCommTime != null">lastCommTime,</if>
+            <if test="lastDataTime != null">lastDataTime,</if>
+            <if test="onlineState != null">onlineState,</if>
+            <if test="pH != null">pH,</if>
+            <if test="productKey != null">productKey,</if>
+            <if test="waterTemp != null">waterTemp,</if>
+            <if test="onOffTime != null">onOffTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="M1OXHi != null">#{M1OXHi},</if>
+            <if test="M1OXLow != null">#{M1OXLow},</if>
+            <if test="M1T1Span != null">#{M1T1Span},</if>
+            <if test="M1T2Span != null">#{M1T2Span},</if>
+            <if test="M1T3Span != null">#{M1T3Span},</if>
+            <if test="M1WorkMode != null">#{M1WorkMode},</if>
+            <if test="M1WorkState != null">#{M1WorkState},</if>
+            <if test="M2OXHi != null">#{M2OXHi},</if>
+            <if test="M2OXLow != null">#{M2OXLow},</if>
+            <if test="M2T1Span != null">#{M2T1Span},</if>
+            <if test="M2T2Span != null">#{M2T2Span},</if>
+            <if test="M2T3Span != null">#{M2T3Span},</if>
+            <if test="M2WorkMode != null">#{M2WorkMode},</if>
+            <if test="M2WorkState != null">#{M2WorkState},</if>
+            <if test="deviceName != null">#{deviceName},</if>
+            <if test="dox != null">#{dox},</if>
+            <if test="lastCommTime != null">#{lastCommTime},</if>
+            <if test="lastDataTime != null">#{lastDataTime},</if>
+            <if test="onlineState != null">#{onlineState},</if>
+            <if test="pH != null">#{pH},</if>
+            <if test="productKey != null">#{productKey},</if>
+            <if test="waterTemp != null">#{waterTemp},</if>
+            <if test="onOffTime != null">#{onOffTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateIotDevice" parameterType="IotDevice">
+        update iot_device
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="M1OXHi != null">M1OXHi = #{M1OXHi},</if>
+            <if test="M1OXLow != null">M1OXLow = #{M1OXLow},</if>
+            <if test="M1T1Span != null">M1T1Span = #{M1T1Span},</if>
+            <if test="M1T2Span != null">M1T2Span = #{M1T2Span},</if>
+            <if test="M1T3Span != null">M1T3Span = #{M1T3Span},</if>
+            <if test="M1WorkMode != null">M1WorkMode = #{M1WorkMode},</if>
+            <if test="M1WorkState != null">M1WorkState = #{M1WorkState},</if>
+            <if test="M2OXHi != null">M2OXHi = #{M2OXHi},</if>
+            <if test="M2OXLow != null">M2OXLow = #{M2OXLow},</if>
+            <if test="M2T1Span != null">M2T1Span = #{M2T1Span},</if>
+            <if test="M2T2Span != null">M2T2Span = #{M2T2Span},</if>
+            <if test="M2T3Span != null">M2T3Span = #{M2T3Span},</if>
+            <if test="M2WorkMode != null">M2WorkMode = #{M2WorkMode},</if>
+            <if test="M2WorkState != null">M2WorkState = #{M2WorkState},</if>
+            <if test="deviceName != null">deviceName = #{deviceName},</if>
+            <if test="dox != null">dox = #{dox},</if>
+            <if test="lastCommTime != null">lastCommTime = #{lastCommTime},</if>
+            <if test="lastDataTime != null">lastDataTime = #{lastDataTime},</if>
+            <if test="onlineState != null">onlineState = #{onlineState},</if>
+            <if test="pH != null">pH = #{pH},</if>
+            <if test="productKey != null">productKey = #{productKey},</if>
+            <if test="waterTemp != null">waterTemp = #{waterTemp},</if>
+            <if test="onOffTime != null">onOffTime = #{onOffTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteIotDeviceById" parameterType="String">
+        delete from iot_device where id = #{id}
+    </delete>
+
+    <delete id="deleteIotDeviceByIds" parameterType="String">
+        delete from iot_device where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

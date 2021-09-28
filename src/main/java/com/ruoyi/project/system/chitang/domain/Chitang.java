@@ -59,11 +59,11 @@ public class Chitang extends BaseEntity
 
     /** 经度 */
     @Excel(name = "经度")
-    private Long longitude;
+    private Double longitude;
 
     /** 纬度 */
     @Excel(name = "纬度")
-    private Long latitude;
+    private Double latitude;
 
     public void setId(Long id)
     {
@@ -155,21 +155,21 @@ public class Chitang extends BaseEntity
     {
         return phone;
     }
-    public void setLongitude(Long longitude)
+    public void setLongitude(Double longitude)
     {
         this.longitude = longitude;
     }
 
-    public Long getLongitude()
+    public Double getLongitude()
     {
         return longitude;
     }
-    public void setLatitude(Long latitude)
+    public void setLatitude(Double latitude)
     {
         this.latitude = latitude;
     }
 
-    public Long getLatitude()
+    public Double getLatitude()
     {
         return latitude;
     }

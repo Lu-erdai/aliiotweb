@@ -1,7 +1,9 @@
 package com.ruoyi.project.api;
 
 
+import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.system.chitang.domain.Chitang;
+import com.ruoyi.project.system.chitang.service.IChitangService;
 import com.ruoyi.project.system.user.domain.User;
 import com.ruoyi.project.system.user.service.IUserService;
 import com.ruoyi.project.system.user.service.UserServiceImpl;
@@ -29,7 +31,11 @@ public class AliiotApi {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IChitangService chitangService;
 
+
+    @CrossOrigin
     @GetMapping("/login")
     @ResponseBody
     public Long getHisData(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
@@ -48,16 +54,16 @@ public class AliiotApi {
     }
 
 
+    //获取用户归属的池塘
+    @CrossOrigin
     @GetMapping("/getUserChitangs")
     @ResponseBody
-    public List<Chitang> getUserChitangs(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
+    public AjaxResult getUserChitangs(@RequestParam Long userId) {
 
+        List<Chitang> chitangs = chitangService.selectAllUserChitangs(userId);
 
+        return AjaxResult.success(chitangs);
 
-
-
-
-        return null;
     }
 
 

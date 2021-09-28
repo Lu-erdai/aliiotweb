@@ -44,6 +44,11 @@ public class ChitangServiceImpl implements IChitangService
         return chitangMapper.selectChitangList(chitang);
     }
 
+    @Override
+    public List<Chitang> selectAllUserChitangs(Long UserId) {
+        return chitangMapper.selectAllUserChitangs(UserId);
+    }
+
     /**
      * 新增【请填写功能名称】
      * 
