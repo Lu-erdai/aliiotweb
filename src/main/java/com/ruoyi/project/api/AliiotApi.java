@@ -4,6 +4,8 @@ package com.ruoyi.project.api;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.system.chitang.domain.Chitang;
 import com.ruoyi.project.system.chitang.service.IChitangService;
+import com.ruoyi.project.system.device.domain.IotDevice;
+import com.ruoyi.project.system.device.service.IIotDeviceService;
 import com.ruoyi.project.system.user.domain.User;
 import com.ruoyi.project.system.user.service.IUserService;
 import com.ruoyi.project.system.user.service.UserServiceImpl;
@@ -34,6 +36,9 @@ public class AliiotApi {
     @Autowired
     private IChitangService chitangService;
 
+    @Autowired
+    private IIotDeviceService iIotDeviceService;
+
 
     @CrossOrigin
     @GetMapping("/login")
@@ -45,7 +50,7 @@ public class AliiotApi {
         user.setApppassword(password);
         List<User> users = userService.selectUserList(user);
         Long userId = null;
-        if(users.size()>0){
+        if (users.size() > 0) {
             User user1 = users.get(0);
             userId = user1.getUserId();
         }
@@ -67,8 +72,20 @@ public class AliiotApi {
     }
 
 
+    //获取池塘详细信息
+    @CrossOrigin
+    @GetMapping("/chitangdetail")
+    @ResponseBody
+    public AjaxResult chitangdetail(@RequestParam String deviceName) {
 
+        IotDevice iotDevice = iIotDeviceService.selectIotDeviceByDeviceName(deviceName);
 
+        if(iotDevice==null){
+            return AjaxResult.error("没有对应设备");
+        }
+
+        return AjaxResult.success(iotDevice);
+    }
 
 
 }

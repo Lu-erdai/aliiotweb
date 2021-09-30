@@ -32,6 +32,11 @@ public class IotDeviceServiceImpl implements IIotDeviceService
         return iotDeviceMapper.selectIotDeviceById(id);
     }
 
+    @Override
+    public IotDevice selectIotDeviceByDeviceName(String deviceName) {
+        return iotDeviceMapper.selectIotDeviceByDeviceName(deviceName);
+    }
+
     /**
      * 查询【请填写功能名称】列表
      * 

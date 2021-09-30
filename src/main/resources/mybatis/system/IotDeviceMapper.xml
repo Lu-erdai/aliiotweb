@@ -68,7 +68,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectIotDeviceVo"/>
         where id = #{id}
     </select>
-        
+
+
+    <select id="selectIotDeviceByDeviceName" parameterType="String" resultMap="IotDeviceResult">
+        <include refid="selectIotDeviceVo"/>
+        where deviceName = #{deviceName}
+    </select>
+
+
+
+
+
     <insert id="insertIotDevice" parameterType="IotDevice">
         insert into iot_device
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -19,6 +19,11 @@ public interface IIotDeviceService
      */
     public IotDevice selectIotDeviceById(String id);
 
+
+
+    public IotDevice selectIotDeviceByDeviceName(String deviceName);
+
+
     /**
      * 查询【请填写功能名称】列表
      * 

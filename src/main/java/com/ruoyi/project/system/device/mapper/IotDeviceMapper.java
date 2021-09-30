@@ -58,4 +58,6 @@ public interface IotDeviceMapper
      * @return 结果
      */
     public int deleteIotDeviceByIds(String[] ids);
+
+    IotDevice selectIotDeviceByDeviceName(String deviceName);
 }
